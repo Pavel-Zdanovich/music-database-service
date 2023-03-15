@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: deezer-pulling-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/deezer-pulling-service?createDatabaseIfNotExist=true
+    username: root
+    password: Er50xY*#6ZYW
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  gson:
+    date-format: yyyy-MM-dd
+    field-naming-policy: lower_case_with_underscores
+  liquibase:
+    enabled: false
+
+min: 1
+max: 2_147_483_647
+threadCount: 100
+cron: '* * * 0/5 * ?'
+
+logging:
+  pattern:
+    console: '%clr(%5p) %clr(%-50.50logger{49}){cyan} %clr(:){faint} %m%n{%wEx}'
+  level:
+    liquibase: debug
+    org.hibernate.SQL: debug
+#    org.hibernate.orm.jdbc.bind: trace
+    org.quartz: debug
