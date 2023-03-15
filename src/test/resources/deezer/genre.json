@@ -1,0 +1,10 @@
+{
+  "id": 113,
+  "name": "Dance",
+  "picture": "https://api.deezer.com/genre/113/image",
+  "picture_small": "https://e-cdns-images.dzcdn.net/images/misc/bd5fdfa1a23e02e2697818e09e008e69/56x56-000000-80-0-0.jpg",
+  "picture_medium": "https://e-cdns-images.dzcdn.net/images/misc/bd5fdfa1a23e02e2697818e09e008e69/250x250-000000-80-0-0.jpg",
+  "picture_big": "https://e-cdns-images.dzcdn.net/images/misc/bd5fdfa1a23e02e2697818e09e008e69/500x500-000000-80-0-0.jpg",
+  "picture_xl": "https://e-cdns-images.dzcdn.net/images/misc/bd5fdfa1a23e02e2697818e09e008e69/1000x1000-000000-80-0-0.jpg",
+  "type": "genre"
+}

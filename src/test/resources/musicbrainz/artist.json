@@ -1,0 +1,637 @@
+{
+  "created": "2023-03-24T13:24:20.954Z",
+  "count": 147176,
+  "offset": 0,
+  "artists": [
+    {
+      "id": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 100,
+      "name": "Bring Me the Horizon",
+      "sort-name": "Bring Me the Horizon",
+      "country": "GB",
+      "area": {
+        "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "United Kingdom",
+        "sort-name": "United Kingdom",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "begin-area": {
+        "id": "3ce737cb-f5bb-403d-a98a-e0602670229f",
+        "type": "City",
+        "type-id": "6fd8f29a-3d0a-32fc-980d-ea697b69da78",
+        "name": "Sheffield",
+        "sort-name": "Sheffield",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "isnis": [
+        "0000000122868773"
+      ],
+      "life-span": {
+        "begin": "2004-03",
+        "ended": null
+      },
+      "aliases": [
+        {
+          "sort-name": "BMTH",
+          "name": "BMTH",
+          "locale": null,
+          "type": null,
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        }
+      ],
+      "tags": [
+        {
+          "count": 2,
+          "name": "electronic"
+        },
+        {
+          "count": 8,
+          "name": "alternative rock"
+        },
+        {
+          "count": 11,
+          "name": "metalcore"
+        },
+        {
+          "count": 2,
+          "name": "alternative metal"
+        },
+        {
+          "count": 4,
+          "name": "pop rock"
+        },
+        {
+          "count": 1,
+          "name": "post-hardcore"
+        },
+        {
+          "count": 4,
+          "name": "deathcore"
+        },
+        {
+          "count": 1,
+          "name": "alternative hardcore"
+        },
+        {
+          "count": 2,
+          "name": "electronic rock"
+        },
+        {
+          "count": 4,
+          "name": "melodic metalcore"
+        }
+      ]
+    },
+    {
+      "id": "39e3dbcb-fbb2-4967-8831-4df893d027bc",
+      "type": "Person",
+      "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+      "score": 53,
+      "gender-id": "36d3d30a-839d-3eda-8cb3-29be4384e4a9",
+      "name": "Matt Nicholls",
+      "sort-name": "Nicholls, Matt",
+      "gender": "male",
+      "country": "GB",
+      "area": {
+        "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "United Kingdom",
+        "sort-name": "United Kingdom",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Bring Me the Horizon drummer",
+      "ipis": [
+        "00571024577"
+      ],
+      "life-span": {
+        "begin": "1986-03-22",
+        "ended": null
+      },
+      "aliases": [
+        {
+          "sort-name": "Nicholls, Matthew Stephen",
+          "type-id": "d4dcd0c0-b341-3612-a332-c0ce797b25cf",
+          "name": "Matthew Stephen Nicholls",
+          "locale": null,
+          "type": "Legal name",
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        }
+      ]
+    },
+    {
+      "id": "f9af1209-0b96-406e-853c-86192304d66d",
+      "type": "Person",
+      "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+      "score": 53,
+      "gender-id": "36d3d30a-839d-3eda-8cb3-29be4384e4a9",
+      "name": "Matt Kean",
+      "sort-name": "Kean, Matt",
+      "gender": "male",
+      "country": "GB",
+      "area": {
+        "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "United Kingdom",
+        "sort-name": "United Kingdom",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Bring Me the Horizon bassist",
+      "ipis": [
+        "00571025672"
+      ],
+      "life-span": {
+        "begin": "1986-06-02",
+        "ended": null
+      },
+      "aliases": [
+        {
+          "sort-name": "Kean, Matt",
+          "name": "Matt Kean",
+          "locale": null,
+          "type": null,
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        },
+        {
+          "sort-name": "Kean, Matthew",
+          "type-id": "d4dcd0c0-b341-3612-a332-c0ce797b25cf",
+          "name": "Matthew Kean",
+          "locale": null,
+          "type": "Legal name",
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        }
+      ]
+    },
+    {
+      "id": "3997970b-0915-4404-a397-0f0cb7387ec9",
+      "score": 38,
+      "name": "Bring Me The Mashup",
+      "sort-name": "Bring Me The Mashup",
+      "disambiguation": "Mash-up Artist",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "0e8587d0-6023-40f1-83d6-833cb15f699b",
+      "score": 33,
+      "name": "ME",
+      "sort-name": "ME",
+      "country": "AU",
+      "area": {
+        "id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Australia",
+        "sort-name": "Australia",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Australian indie rock band",
+      "life-span": {
+        "begin": "2008",
+        "ended": null
+      },
+      "aliases": [
+        {
+          "sort-name": "ME The Band",
+          "name": "ME The Band",
+          "locale": null,
+          "type": null,
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        },
+        {
+          "sort-name": "Me The Band",
+          "name": "Me The Band",
+          "locale": null,
+          "type": null,
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        }
+      ]
+    },
+    {
+      "id": "3a6b51fb-d3b3-43be-ba54-756cdce237a9",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 32,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "area": {
+        "id": "3eba1671-51f3-465d-bd24-45455c20fddb",
+        "type": "City",
+        "type-id": "6fd8f29a-3d0a-32fc-980d-ea697b69da78",
+        "name": "Alicante",
+        "sort-name": "Alicante",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "begin-area": {
+        "id": "3eba1671-51f3-465d-bd24-45455c20fddb",
+        "type": "City",
+        "type-id": "6fd8f29a-3d0a-32fc-980d-ea697b69da78",
+        "name": "Alicante",
+        "sort-name": "Alicante",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Stoner/space rock band from Alicante, Spain",
+      "life-span": {
+        "begin": "2011-11-01",
+        "ended": null
+      },
+      "tags": [
+        {
+          "count": 1,
+          "name": "hard rock"
+        },
+        {
+          "count": 1,
+          "name": "stoner rock"
+        },
+        {
+          "count": 1,
+          "name": "rock"
+        },
+        {
+          "count": 1,
+          "name": "space rock"
+        },
+        {
+          "count": 1,
+          "name": "desert rock"
+        }
+      ]
+    },
+    {
+      "id": "0baa7ad9-a752-462d-8279-e039c970bb8d",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 32,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "DE",
+      "area": {
+        "id": "85752fda-13c4-31a3-bee5-0e5cb1f51dad",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Germany",
+        "sort-name": "Germany",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "German metal band",
+      "life-span": {
+        "begin": "1998",
+        "end": "2006",
+        "ended": true
+      }
+    },
+    {
+      "id": "ccbf1727-8e08-4c2a-8604-3c40fe2a77c7",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 32,
+      "name": "Bring Me the Fucking Riot… Man",
+      "sort-name": "Bring Me the Fucking Riot… Man",
+      "country": "SE",
+      "area": {
+        "id": "23d10872-f5ae-3f0c-bf55-332788a16ecb",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Sweden",
+        "sort-name": "Sweden",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "39ffa8ae-a68e-4724-899f-f596a789934d",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Bring Me the Head of Orion",
+      "sort-name": "Bring Me the Head of Orion",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "ec968b82-3ffc-490f-85f6-a8ea2a3b3493",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "NL",
+      "area": {
+        "id": "ef1b7cc0-cd26-36f4-8ea0-04d9623786c7",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Netherlands",
+        "sort-name": "Netherlands",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Dutch heavy metal band",
+      "life-span": {
+        "begin": "1982",
+        "end": "1985",
+        "ended": true
+      }
+    },
+    {
+      "id": "05f0c0a0-97be-48bd-9d12-43b10c24b859",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "disambiguation": "DJ Junya & Vasco Zorflux, Psytrance",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "dee5197f-d134-40dd-96fc-8ebcfbbcdd5b",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "GP",
+      "area": {
+        "id": "338346f8-4dc2-38e8-a009-5a3e1585348f",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Guadeloupe",
+        "sort-name": "Guadeloupe",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Guadeloupe",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "36fb93e0-3b5c-4d29-b9d4-5d541585fc44",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon…",
+      "sort-name": "Horizon…",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "607a0389-849b-4d14-a51e-73a562da08bc",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Rock",
+      "disambiguation": "Hard Rock",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "e911f20b-a787-4f57-b4d3-f9724b27859c",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "disambiguation": "house",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "a65603b5-d760-430a-b8bf-3af96c9c2cae",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "disambiguation": "appears on a dubstep compilation",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "b647e68e-d088-432f-9878-769519dfefe4",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "US",
+      "area": {
+        "id": "489ce91b-6658-3307-9877-795b68554c98",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "United States",
+        "sort-name": "United States",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "US Navy music ensemble",
+      "life-span": {
+        "ended": null
+      },
+      "aliases": [
+        {
+          "sort-name": "US Navy Great Lakes Horizon Band",
+          "name": "US Navy Great Lakes Horizon Band",
+          "locale": null,
+          "type": null,
+          "primary": null,
+          "begin-date": null,
+          "end-date": null
+        }
+      ]
+    },
+    {
+      "id": "cbce7808-8a3f-48da-8866-4792b67bdced",
+      "score": 31,
+      "name": "HORIZON",
+      "sort-name": "HORIZON",
+      "disambiguation": "trance (jap?)",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "39a1d625-22bb-47c3-8e09-8fb1511e07bd",
+      "score": 31,
+      "name": "H.O.R.I.Z.O.N",
+      "sort-name": "H.O.R.I.Z.O.N",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "58318419-4083-413a-87be-a379c0439f6f",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "disambiguation": "Boogie funk modern soul band from San Antonio, Texas, USA",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "2c791685-6435-4282-b0a0-bb05ccfa8dd9",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "BE",
+      "area": {
+        "id": "5b8a5ee5-0bb3-34cf-9a75-c27c44e341fc",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Belgium",
+        "sort-name": "Belgium",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Belgian",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "9736b6cc-9242-4ab4-8318-2dea77066971",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "area": {
+        "id": "29a709d8-0320-493e-8d0c-f2c386662b7f",
+        "type": "City",
+        "type-id": "6fd8f29a-3d0a-32fc-980d-ea697b69da78",
+        "name": "Chicago",
+        "sort-name": "Chicago",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Horn-infused band from Chicago",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "246dbab1-51cf-41b2-8f7f-6f842478ede7",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "NL",
+      "area": {
+        "id": "ef1b7cc0-cd26-36f4-8ea0-04d9623786c7",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "Netherlands",
+        "sort-name": "Netherlands",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "Dutch late 1990s doom metal band",
+      "life-span": {
+        "ended": null
+      }
+    },
+    {
+      "id": "af12bf6b-4d36-4ec0-9ccf-8999319a4778",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Horizon",
+      "sort-name": "Horizon",
+      "country": "US",
+      "area": {
+        "id": "489ce91b-6658-3307-9877-795b68554c98",
+        "type": "Country",
+        "type-id": "06dd0ae4-8c74-30bb-b43d-95dcedf961de",
+        "name": "United States",
+        "sort-name": "United States",
+        "life-span": {
+          "ended": null
+        }
+      },
+      "disambiguation": "United States classic rock, Sammy Hall trio",
+      "life-span": {
+        "ended": null
+      },
+      "tags": [
+        {
+          "count": 1,
+          "name": "christian"
+        },
+        {
+          "count": 1,
+          "name": "classic rock"
+        },
+        {
+          "count": 1,
+          "name": "aor"
+        },
+        {
+          "count": 1,
+          "name": "united states"
+        }
+      ]
+    },
+    {
+      "id": "627bea65-f514-4bef-9e62-4ccb643641b1",
+      "type": "Group",
+      "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+      "score": 31,
+      "name": "Bring The Arsenal",
+      "sort-name": "Bring The Arsenal",
+      "life-span": {
+        "begin": "2008",
+        "ended": null
+      }
+    }
+  ]
+}

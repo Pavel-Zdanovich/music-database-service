@@ -1,9 +1,5 @@
-package com.example.deezerpullingservice;
+package com.example.deezerpullingservice.deezer;
 
-import com.example.deezerpullingservice.model.Album;
-import com.example.deezerpullingservice.model.Artist;
-import com.example.deezerpullingservice.model.Genre;
-import com.example.deezerpullingservice.model.Track;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DeezerPullingService {
+public class DeezerService {
 
     private static final String ERROR = "{\"error\":{\"type\":\"DataException\",\"message\":\"no data\",\"code\":800}}";
 
@@ -25,33 +21,14 @@ public class DeezerPullingService {
 
     private final Gson gson;
 
-    public CompletableFuture<Album> album(int id) {
-        return this.request(Album.class, id);
-    }
-
-    public CompletableFuture<Artist> artist(int id) {
-        return this.request(Artist.class, id);
-    }
-
-    public CompletableFuture<Genre> genre(int id) {
-        return this.request(Genre.class, id);
-    }
-
-    public CompletableFuture<Track> track(int id) {
-        return this.request(Track.class, id);
-    }
-
-    private <T> CompletableFuture<T> request(Class<T> tClass, int id) {
+    public <T> CompletableFuture<T> getAsync(Class<T> tClass, int id) {
         CompletableFuture<T> completableFuture = new CompletableFuture<>();
-        Request request = new Request.Builder()
-                .url("https://api.deezer.com/" + tClass.getSimpleName().toLowerCase() + "/" + id)
-                .get()
-                .build();
+        Request request = request(tClass, id);
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 log.error(request.toString(), e);
-//                completableFuture.completeExceptionally(e);
+                completableFuture.complete(null);
             }
 
             @Override
@@ -66,10 +43,17 @@ public class DeezerPullingService {
                     completableFuture.complete(t);
                 } catch (Exception e) {
                     log.error(request.toString(), e);
-//                    completableFuture.completeExceptionally(e);
+                    completableFuture.complete(null);
                 }
             }
         });
         return completableFuture;
+    }
+
+    private <T> Request request(Class<T> tClass, int id) {
+        return new Request.Builder()
+                .get()
+                .url("https://api.deezer.com/" + tClass.getSimpleName().toLowerCase() + "/" + id)
+                .build();
     }
 }

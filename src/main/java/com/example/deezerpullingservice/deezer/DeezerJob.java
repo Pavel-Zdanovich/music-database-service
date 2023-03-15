@@ -1,23 +1,29 @@
-package com.example.deezerpullingservice;
+package com.example.deezerpullingservice.deezer;
 
+import com.example.deezerpullingservice.service.TrackService;
+import com.example.deezerpullingservice.model.Track;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobKey;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class DeezerPullingJob extends QuartzJobBean {
+public class DeezerJob extends QuartzJobBean {
 
     @Autowired
-    private DeezerPullingService deezerPullingService;
+    private DeezerService deezerService;
 
     @Autowired
-    private TrackService service;
+    private ConversionService conversionService;
+
+    @Autowired
+    private TrackService trackService;
 
     @Override
     public void executeInternal(JobExecutionContext context) {
@@ -30,9 +36,9 @@ public class DeezerPullingJob extends QuartzJobBean {
         log.info("{} [{}, {}] started", jobKey, min, max);
 
         for (int id = min; id <= max; id++) {
-            deezerPullingService.track(id).thenAccept(track -> {
-                if (track != null) {
-                    service.save(track);
+            deezerService.getAsync(com.example.deezerpullingservice.deezer.model.Track.class, id).thenAccept(track -> {
+                if (track != null && track.getReadable() && track.getPreview() != null) {
+                    trackService.save(conversionService.convert(track, Track.class));
                 }
             });
         }
