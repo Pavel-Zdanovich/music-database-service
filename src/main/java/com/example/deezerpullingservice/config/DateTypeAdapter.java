@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,6 +54,9 @@ public class DateTypeAdapter extends TypeAdapter<Date> {
         String s = in.nextString();
         if (s.startsWith("0000-")) {
             return null;
+        }
+        if (s.length() == 4) {
+            return Date.from(LocalDate.ofYearDay(Integer.parseInt(s), 1).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         }
         try {
             return ISO8601Utils.parse(s, new ParsePosition(0));
