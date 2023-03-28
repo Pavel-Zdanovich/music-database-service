@@ -40,9 +40,11 @@ public class MusicBrainzService {
             public void onResponse(@NotNull Call call, @NotNull Response response) {
                 try (ResponseBody responseBody = response.body()) {
                     String string = responseBody.string();
-                    Page<T> page = gson.fromJson(string, new TypeToken<>() {});
-                    List<T> list = page.get(tClass);
-                    completableFuture.complete(list.get(0));
+                    Page page = gson.fromJson(string, new TypeToken<>() {
+                    });
+                    List<T> list = (List<T>) page.get(tClass);
+                    T t = (list == null || list.isEmpty()) ? null : list.get(0);
+                    completableFuture.complete(t);
                 } catch (Exception e) {
                     log.error(request.toString(), e);
                     completableFuture.complete(null);
@@ -61,7 +63,7 @@ public class MusicBrainzService {
         return new Request.Builder()
                 .get()
                 .url(url)
-                .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36")
+                .header(HttpHeaders.USER_AGENT, "Melotrack/1.0.0 (pavelzdanovich3301@gmail.com)")
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }

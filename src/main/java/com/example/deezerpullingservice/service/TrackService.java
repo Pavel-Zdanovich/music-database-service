@@ -39,11 +39,15 @@ public class TrackService {
         return repository.getByCountries(code, pageable);
     }
 
+    public Page<Track> findByGenre(String name, Pageable pageable) {
+        return repository.getByGenre(name, pageable);
+    }
+
     public Page<Track> findByLanguage(String code, Pageable pageable) {
         return repository.getByLanguage(code, pageable);
     }
 
-    public Page<Track> findByGenre(String name, Pageable pageable) {
-        return repository.getByGenre(name, pageable);
+    public void deleteAllById(Iterable<? extends Integer> ids) {
+        repository.deleteAllById(ids);
     }
 }

@@ -4,15 +4,14 @@ import com.example.deezerpullingservice.model.Album;
 import com.example.deezerpullingservice.model.Artist;
 import com.example.deezerpullingservice.model.Track;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class TrackConverter implements Converter<com.example.deezerpullingservice.deezer.model.Track, Track> {
 
-    private final ConversionService conversionService;
+    private final Converter<com.example.deezerpullingservice.deezer.model.Album, Album> albumConverter;
+
+    private final Converter<com.example.deezerpullingservice.deezer.model.Artist, Artist> artistConverter;
 
     @Override
     public Track convert(com.example.deezerpullingservice.deezer.model.Track source) {
@@ -23,9 +22,9 @@ public class TrackConverter implements Converter<com.example.deezerpullingservic
         track.setRank(source.getRank());
         track.setPreview(source.getPreview());
         com.example.deezerpullingservice.deezer.model.Artist artist = source.getArtist();
-        track.setArtist(conversionService.convert(artist, Artist.class));
+        track.setArtist(artist == null ? null : artistConverter.convert(artist));
         com.example.deezerpullingservice.deezer.model.Album album = source.getAlbum();
-        track.setAlbum(conversionService.convert(album, Album.class));
+        track.setAlbum(album == null ? null : albumConverter.convert(album));
         return track;
     }
 }

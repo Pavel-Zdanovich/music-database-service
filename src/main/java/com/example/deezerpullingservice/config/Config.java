@@ -1,7 +1,12 @@
 package com.example.deezerpullingservice.config;
 
-import com.example.deezerpullingservice.deezer.DeezerJob;
-import com.example.deezerpullingservice.musicbrainz.MusicBrainzJob;
+import com.example.deezerpullingservice.converter.AlbumConverter;
+import com.example.deezerpullingservice.converter.ArtistConverter;
+import com.example.deezerpullingservice.converter.GenreConverter;
+import com.example.deezerpullingservice.converter.TrackConverter;
+import com.example.deezerpullingservice.job.AlbumJob;
+import com.example.deezerpullingservice.job.ArtistJob;
+import com.example.deezerpullingservice.job.TrackJob;
 import lombok.Setter;
 import okhttp3.OkHttpClient;
 import org.quartz.*;
@@ -14,30 +19,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties("job")
+@ConfigurationProperties("jobs")
 @Setter
 public class Config {
 
-    private int min;
+    private Map<String, String> albumJob;
 
-    private int max;
+    private Map<String, String> artistJob;
 
-    private int numberOfJobs;
-
-    private int deezerResponseTimeInSeconds;
-
-    private String cron;
+    private Map<String, String> trackJob;
 
     private boolean overwriteExistingJobs;
 
     private boolean autoStartup;
+
+    private JobDetail[] jobDetails;
+
+    private Trigger[] triggers;
 
     @Bean
     public SpringBeanJobFactory springBeanJobFactory(ApplicationContext applicationContext) {
@@ -48,88 +51,111 @@ public class Config {
 
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(SpringBeanJobFactory springBeanJobFactory) {
-        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-        schedulerFactoryBean.setJobFactory(springBeanJobFactory);
-
-        if (min < 1 || max < 1 || max < min) {
-            throw new RuntimeException("Range of track id is invalid: [%d, %d]".formatted(min, max));
-        }
-        if (numberOfJobs < 1) {
-            throw new RuntimeException("Number of jobs is invalid: " + numberOfJobs);
-        }
-        if (deezerResponseTimeInSeconds < 1) {
-            throw new RuntimeException("Deezer response time in seconds invalid: " + deezerResponseTimeInSeconds);
-        }
-        int threadCount = numberOfJobs * 2;
-        JobDetail[] jobDetails = new JobDetail[threadCount];
-        Trigger[] triggers = new Trigger[threadCount];
-        int range = Math.subtractExact(max, min) / numberOfJobs;
-        int delay = range * deezerResponseTimeInSeconds;
-        int i, j, seconds, page;
-        for (i = 0, j = min, seconds = 0, page = 0; i < threadCount - 2; i += 2, j += range, seconds += delay, page++) {
-            JobDetail deezerJob = deezerJob(i + 1, j, j + range);
-            jobDetails[i] = deezerJob;
-            triggers[i] = deezerTrigger(i, deezerJob, LocalDateTime.now().plusSeconds(seconds));
-
-            JobDetail musicbrainzJob = musicBrainzJob(i, page, range);
-            jobDetails[i + 1] = musicbrainzJob;
-            triggers[i + 1] = musicBrainzTrigger(i, musicbrainzJob, LocalDateTime.now().plusSeconds(seconds));
-        }
-        JobDetail deezerJob = deezerJob(i + 1, j, max);
-        jobDetails[i] = deezerJob;
-        triggers[i] = deezerTrigger(i, deezerJob, LocalDateTime.now().plusSeconds(seconds));
-
-        JobDetail musicbrainzJob = musicBrainzJob(i, page, range);
-        jobDetails[i + 1] = musicbrainzJob;
-        triggers[i + 1] = musicBrainzTrigger(i, musicbrainzJob, LocalDateTime.now().plusSeconds(seconds));
-
-        schedulerFactoryBean.setJobDetails(jobDetails);
-        schedulerFactoryBean.setTriggers(triggers);
+        int threadCount = parallelize();
         Properties properties = new Properties();
         properties.setProperty(SchedulerFactoryBean.PROP_THREAD_COUNT, String.valueOf(threadCount));
+        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+        schedulerFactoryBean.setJobFactory(springBeanJobFactory);
+        schedulerFactoryBean.setJobDetails(jobDetails);
+        schedulerFactoryBean.setTriggers(triggers);
         schedulerFactoryBean.setQuartzProperties(properties);
         schedulerFactoryBean.setOverwriteExistingJobs(overwriteExistingJobs);
         schedulerFactoryBean.setAutoStartup(autoStartup);
         return schedulerFactoryBean;
     }
 
-    public JobDetail deezerJob(int i, int min, int max) {
+    private int parallelize() {
+        int numberOfAlbumJobs = Integer.parseInt(albumJob.get("number"));
+        if (numberOfAlbumJobs < 0 || numberOfAlbumJobs > 3) {
+            throw new RuntimeException("Number of album jobs is invalid: " + numberOfAlbumJobs);
+        }
+        int sizeOfAlbumPage = Integer.parseInt(albumJob.get("pageSize"));
+        if (sizeOfAlbumPage < 1 || sizeOfAlbumPage > 100) {
+            throw new RuntimeException("Size of album page is invalid: " + sizeOfAlbumPage);
+        }
+        String cronOfAlbumJob = albumJob.get("cron");
+
+        int numberOfArtistJobs = Integer.parseInt(artistJob.get("number"));
+        if (numberOfArtistJobs < 0 || numberOfArtistJobs > 3) {
+            throw new RuntimeException("Number of artist jobs is invalid: " + numberOfArtistJobs);
+        }
+        int sizeOfArtistPage = Integer.parseInt(artistJob.get("pageSize"));
+        if (sizeOfArtistPage < 1 || sizeOfArtistPage > 100) {
+            throw new RuntimeException("Size of artist page is invalid: " + sizeOfArtistPage);
+        }
+        String cronOfArtistJob = artistJob.get("cron");
+
+        int start = Integer.parseInt(trackJob.get("start"));
+        int end = Integer.parseInt(trackJob.get("end"));
+        if (start < 1 || end <= start) {
+            throw new RuntimeException("Range of track id is invalid: [%d, %d]".formatted(start, end));
+        }
+        int numberOfTrackJobs = Integer.parseInt(trackJob.get("number"));
+        if (numberOfTrackJobs < 0 || numberOfTrackJobs > 5) {
+            throw new RuntimeException("Number of track jobs is invalid: " + numberOfTrackJobs);
+        }
+        String cronOfTrackJob = trackJob.get("cron");
+
+        int threadCount = numberOfAlbumJobs + numberOfArtistJobs + numberOfTrackJobs;
+        jobDetails = new JobDetail[threadCount];
+        triggers = new Trigger[threadCount];
+
+        int index = 0;
+        for (int i = 0; i < numberOfAlbumJobs; i++, index++) {
+            schedule(index, AlbumJob.class, i + 1,
+                    Map.of(
+                            "start", i * numberOfAlbumJobs,
+                            "size", sizeOfAlbumPage,
+                            "step", (i + 1) * numberOfAlbumJobs
+                    ),
+                    cronOfAlbumJob
+            );
+        }
+        for (int i = 0; i < numberOfArtistJobs; i++, index++) {
+            schedule(index, ArtistJob.class, i + 1,
+                    Map.of(
+                            "start", i * numberOfArtistJobs,
+                            "size", sizeOfArtistPage,
+                            "step", (i + 1) * numberOfArtistJobs
+                    ),
+                    cronOfArtistJob
+            );
+        }
+        for (int i = 0; i < numberOfTrackJobs; i++, index++) {
+            schedule(index, TrackJob.class, i + 1,
+                    Map.of(
+                            "start", start + i,
+                            "end", end,
+                            "step", numberOfTrackJobs
+                    ),
+                    cronOfTrackJob
+            );
+        }
+
+        return threadCount;
+    }
+
+    private void schedule(int index, Class<? extends Job> jobClass, int id, Map<?, ?> data, String cron) {
+        JobDetail jobDetail = jobDetail(jobClass, id, data);
+        jobDetails[index] = jobDetail;
+        Trigger trigger = trigger(jobDetail, cron);
+        triggers[index] = trigger;
+    }
+
+    private JobDetail jobDetail(Class<? extends Job> jobClass, int id, Map<?, ?> data) {
         return JobBuilder
-                .newJob(DeezerJob.class)
-                .withIdentity("Job_" + i, "Deezer")
-                .usingJobData("min", min)
-                .usingJobData("max", max)
+                .newJob(jobClass)
+                .withIdentity(jobClass.getSimpleName() + id)
+                .setJobData(new JobDataMap(data))
                 .storeDurably()
                 .build();
     }
 
-    public Trigger deezerTrigger(int i, JobDetail jobDetail, LocalDateTime start) {
+    private Trigger trigger(JobDetail jobDetail, String cron) {
         return TriggerBuilder
                 .newTrigger()
-                .withIdentity("Trigger_" + i, "Deezer")
-                .withSchedule(CronScheduleBuilder.cronSchedule(cron))
                 .forJob(jobDetail)
-                .startAt(Date.from(start.atZone(ZoneId.systemDefault()).toInstant()))
-                .build();
-    }
-
-    public JobDetail musicBrainzJob(int i, int page, int size) {
-        return JobBuilder
-                .newJob(MusicBrainzJob.class)
-                .withIdentity("Job_" + i, "MusicBrainz")
-                .usingJobData("page", page)
-                .usingJobData("size", size)
-                .storeDurably()
-                .build();
-    }
-
-    public Trigger musicBrainzTrigger(int i, JobDetail jobDetail, LocalDateTime start) {
-        return TriggerBuilder
-                .newTrigger()
-                .withIdentity("Trigger_" + i, "MusicBrainz")
                 .withSchedule(CronScheduleBuilder.cronSchedule(cron))
-                .forJob(jobDetail)
-                .startAt(Date.from(start.atZone(ZoneId.systemDefault()).toInstant()))
                 .build();
     }
 
@@ -142,5 +168,25 @@ public class Config {
     public GsonBuilderCustomizer gsonBuilderCustomizer() {
         return builder -> builder
                 .registerTypeAdapterFactory(DateTypeAdapter.FACTORY);
+    }
+
+    @Bean
+    public AlbumConverter albumConverter(GenreConverter genreConverter) {
+        return new AlbumConverter(genreConverter);
+    }
+
+    @Bean
+    public ArtistConverter artistConverter() {
+        return new ArtistConverter();
+    }
+
+    @Bean
+    public GenreConverter genreConverter() {
+        return new GenreConverter();
+    }
+
+    @Bean
+    public TrackConverter trackConverter(AlbumConverter albumConverter, ArtistConverter artistConverter) {
+        return new TrackConverter(albumConverter, artistConverter);
     }
 }

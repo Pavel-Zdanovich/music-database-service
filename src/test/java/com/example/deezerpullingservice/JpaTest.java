@@ -1,6 +1,7 @@
 package com.example.deezerpullingservice;
 
 import com.example.deezerpullingservice.model.*;
+import com.example.deezerpullingservice.repository.AlbumRepository;
 import com.example.deezerpullingservice.repository.ArtistRepository;
 import com.example.deezerpullingservice.repository.TrackRepository;
 import org.assertj.core.api.Assertions;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,7 +21,11 @@ import java.util.Set;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("test")
 public class JpaTest {
+
+    @Autowired
+    AlbumRepository albumRepository;
 
     @Autowired
     ArtistRepository artistRepository;
@@ -106,7 +112,7 @@ public class JpaTest {
 
     @Test
     void getByAlbumId() {
-        trackRepository.saveAndFlush(track);
+        trackRepository.save(track);
         List<Track> actual = trackRepository.getByAlbumId(album.getId());
         Assertions.assertThat(actual)
                 .hasSize(1)
@@ -115,7 +121,7 @@ public class JpaTest {
 
     @Test
     void getByArtistId() {
-        trackRepository.saveAndFlush(track);
+        trackRepository.save(track);
         Page<Track> page = trackRepository.getByArtistId(artist.getId(), Pageable.unpaged());
         Assertions.assertThat(page)
                 .hasSize(1)
@@ -124,7 +130,7 @@ public class JpaTest {
 
     @Test
     void getByCountries() {
-        trackRepository.saveAndFlush(track);
+        trackRepository.save(track);
         Page<Track> page = trackRepository.getByCountries(Set.of("UA"), Pageable.unpaged());
         Assertions.assertThat(page)
                 .hasSize(1)
@@ -133,7 +139,7 @@ public class JpaTest {
 
     @Test
     void getByGenre() {
-        trackRepository.saveAndFlush(track);
+        trackRepository.save(track);
         Page<Track> page = trackRepository.getByGenre("Genre 1", Pageable.unpaged());
         Assertions.assertThat(page)
                 .hasSize(1)
@@ -142,10 +148,22 @@ public class JpaTest {
 
     @Test
     void getByLanguage() {
-        trackRepository.saveAndFlush(track);
+        trackRepository.save(track);
         Page<Track> page = trackRepository.getByLanguage("uk", Pageable.unpaged());
         Assertions.assertThat(page)
                 .hasSize(1)
                 .first().usingRecursiveComparison(configuration).isEqualTo(track);
+    }
+
+    @Test
+    void deleteById() {
+        trackRepository.save(track);
+        trackRepository.deleteAllById(Set.of(1));
+        Page<Track> trackPage = trackRepository.findAll(Pageable.unpaged());
+        Assertions.assertThat(trackPage).hasSize(0);
+        Page<Artist> artistPage = artistRepository.findAll(Pageable.unpaged());
+        Assertions.assertThat(artistPage)
+                .hasSize(1)
+                .first().usingRecursiveComparison(configuration).isEqualTo(artist);
     }
 }

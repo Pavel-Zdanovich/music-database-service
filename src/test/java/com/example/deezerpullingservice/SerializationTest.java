@@ -16,6 +16,7 @@ import org.springframework.boot.test.json.ObjectContent;
 import org.springframework.context.annotation.Import;
 
 import java.io.IOException;
+import java.util.List;
 
 @JsonTest
 @Import(Config.class)
@@ -34,10 +35,10 @@ public class SerializationTest {
     GsonTester<Track> deezerTrackGsonTester;
 
     @Autowired
-    GsonTester<Page<com.example.deezerpullingservice.musicbrainz.model.Artist>> musicbrainzArtistGsonTester;
+    GsonTester<Page> musicbrainzArtistGsonTester;
 
     @Autowired
-    GsonTester<Page<Release>> deezerReleaseGsonTester;
+    GsonTester<Page> deezerReleaseGsonTester;
 
     @Test
     void deezerAlbum() throws IOException {
@@ -69,18 +70,20 @@ public class SerializationTest {
 
     @Test
     void musicbrainzArtist() throws IOException {
-        ObjectContent<Page<com.example.deezerpullingservice.musicbrainz.model.Artist>> artistObjectContent
-                = musicbrainzArtistGsonTester.read("/musicbrainz/artist.json");
-        Page<com.example.deezerpullingservice.musicbrainz.model.Artist> page = artistObjectContent.getObject();
-        com.example.deezerpullingservice.musicbrainz.model.Artist artist = page.get(com.example.deezerpullingservice.musicbrainz.model.Artist.class).get(0);
+        ObjectContent<Page> artistObjectContent = musicbrainzArtistGsonTester.read("/musicbrainz/artist.json");
+        Page page = artistObjectContent.getObject();
+        List<com.example.deezerpullingservice.musicbrainz.model.Artist> list =
+                (List<com.example.deezerpullingservice.musicbrainz.model.Artist>) page.get(com.example.deezerpullingservice.musicbrainz.model.Artist.class);
+        com.example.deezerpullingservice.musicbrainz.model.Artist artist = list.get(0);
         Assertions.assertThat(artist).hasNoNullFieldsOrProperties();
     }
 
     @Test
     void musicbrainzRelease() throws IOException {
-        ObjectContent<Page<Release>> releaseObjectContent = deezerReleaseGsonTester.read("/musicbrainz/release.json");
-        Page<Release> page = releaseObjectContent.getObject();
-        Release release = page.get(Release.class).get(0);
+        ObjectContent<Page> releaseObjectContent = deezerReleaseGsonTester.read("/musicbrainz/release.json");
+        Page page = releaseObjectContent.getObject();
+        List<Release> list = (List<Release>) page.get(Release.class);
+        Release release = list.get(0);
         Assertions.assertThat(release).hasNoNullFieldsOrProperties();
     }
 }

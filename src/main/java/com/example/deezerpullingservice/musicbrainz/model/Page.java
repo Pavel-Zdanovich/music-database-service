@@ -3,7 +3,7 @@ package com.example.deezerpullingservice.musicbrainz.model;
 import java.util.Date;
 import java.util.List;
 
-public class Page<T> {
+public class Page {
 
     private Date created;
 
@@ -11,11 +11,11 @@ public class Page<T> {
 
     private Integer offset;
 
-    private List<T> artists;
+    private List<Artist> artists;
 
-    private List<T> releases;
+    private List<Release> releases;
 
-    public List<T> get(Class<T> tClass) {
+    public <T> Object get(Class<T> tClass) {
         return switch (tClass.getName()) {
             case "com.example.deezerpullingservice.musicbrainz.model.Artist" -> artists;
             case "com.example.deezerpullingservice.musicbrainz.model.Release" -> releases;

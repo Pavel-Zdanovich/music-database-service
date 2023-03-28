@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class DeezerService {
 
-    private static final String ERROR = "{\"error\":{\"type\":\"DataException\",\"message\":\"no data\",\"code\":800}}";
+    private static final String ERROR = "{\"error\"";
 
     private final OkHttpClient okHttpClient;
 
@@ -35,7 +35,7 @@ public class DeezerService {
             public void onResponse(@NotNull Call call, @NotNull Response response) {
                 try (ResponseBody responseBody = response.body()) {
                     String string = responseBody.string();
-                    if (string.equals(ERROR)) {
+                    if (string.startsWith(ERROR)) {
                         completableFuture.complete(null);
                         return;
                     }

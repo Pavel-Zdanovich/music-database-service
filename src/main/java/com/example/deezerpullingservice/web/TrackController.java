@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.SortDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -41,13 +38,18 @@ public class TrackController {
         return trackService.findByCountries(code, pageable);
     }
 
+    @GetMapping("/genre")
+    public Page<Track> readByGenre(@RequestParam String name, @SortDefault Pageable pageable) {
+        return trackService.findByGenre(name, pageable);
+    }
+
     @GetMapping("/language")
     public Page<Track> readByLanguage(@RequestParam String code, @SortDefault Pageable pageable) {
         return trackService.findByLanguage(code, pageable);
     }
 
-    @GetMapping("/genre")
-    public Page<Track> readByGenre(@RequestParam String name, @SortDefault Pageable pageable) {
-        return trackService.findByGenre(name, pageable);
+    @DeleteMapping
+    public void deleteById(@RequestParam Set<Integer> id) {
+        trackService.deleteAllById(id);
     }
 }

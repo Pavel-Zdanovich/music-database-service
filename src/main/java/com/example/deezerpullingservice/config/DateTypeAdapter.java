@@ -18,7 +18,6 @@ import java.text.ParseException;
 import java.text.ParsePosition;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +27,8 @@ public class DateTypeAdapter extends TypeAdapter<Date> {
 
     public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
         @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-        @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
             return typeToken.getRawType() == Date.class ? (TypeAdapter<T>) new DateTypeAdapter() : null;
         }
     };

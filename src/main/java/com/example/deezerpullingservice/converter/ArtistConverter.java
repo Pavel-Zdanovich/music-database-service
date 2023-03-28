@@ -2,9 +2,7 @@ package com.example.deezerpullingservice.converter;
 
 import com.example.deezerpullingservice.model.Artist;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ArtistConverter implements Converter<com.example.deezerpullingservice.deezer.model.Artist, Artist> {
     @Override
     public Artist convert(com.example.deezerpullingservice.deezer.model.Artist source) {
