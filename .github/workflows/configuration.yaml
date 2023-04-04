@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn package
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.EC2_PRIVATE_KEY}}
+          REMOTE_HOST: ${{secrets.EC2_PUBLIC_DNS}}
+          REMOTE_USER: ${{secrets.EC2_USERNAME}}
+          SOURCE: 'target/music-database-service-0.0.1-SNAPSHOT.jar'
+          TARGET: ''
+          SCRIPT_BEFORE: |
+            whoami
+            rm -f music-database-service-0.0.1-SNAPSHOT.jar
+          SCRIPT_AFTER: |
+            whoami
+            java -jar music-database-service-0.0.1-SNAPSHOT.jar

@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 @RequestMapping("/track")
 public class TrackController {
 
