@@ -1,8 +1,8 @@
 spring:
   application:
-    name: deezer-pulling-service
+    name: music-database-service
   datasource:
-    url: jdbc:mysql://localhost:3306/deezer-pulling-service?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/music-database-service?createDatabaseIfNotExist=true
     username: root
     password: Er50xY*#6ZYW
     driver-class-name: com.mysql.cj.jdbc.Driver

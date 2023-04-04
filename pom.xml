@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>deezer-pulling-service</artifactId>
+    <artifactId>music-database-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>deezer-pulling-service</name>
-    <description>deezer-pulling-service</description>
+    <name>music-database-service</name>
+    <description>music-database-service</description>
     <properties>
         <java.version>19</java.version>
         <okhttp.version>4.10.0</okhttp.version>
