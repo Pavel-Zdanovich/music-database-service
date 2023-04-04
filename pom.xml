@@ -17,7 +17,6 @@
         <java.version>19</java.version>
         <okhttp.version>4.10.0</okhttp.version>
         <gson.version>2.10.1</gson.version>
-        <musicbrainz.version>3.0.15</musicbrainz.version>
     </properties>
     <dependencies>
         <dependency>
@@ -55,11 +54,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gson.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hihn</groupId>
-            <artifactId>musicbrainzws2-java</artifactId>
-            <version>${musicbrainz.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
