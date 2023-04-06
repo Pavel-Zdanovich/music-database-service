@@ -32,8 +32,6 @@ jobs:
           SOURCE: './target/music-database-service-0.0.1-SNAPSHOT.jar'
           TARGET: '.'
           SCRIPT_BEFORE: |
-            whoami
             rm -f music-database-service-0.0.1-SNAPSHOT.jar
           SCRIPT_AFTER: |
-            whoami
             screen -d -m java -jar music-database-service-0.0.1-SNAPSHOT.jar
