@@ -33,7 +33,7 @@ jobs:
     start: 1
     end: 2_147_483_647
     number: 1
-    cron: '0 0 15 * * ? *'
+    cron: '0 5 15 * * ? *'
   overwriteExistingJobs: true
   autoStartup: true
 
