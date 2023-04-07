@@ -23,17 +23,17 @@ spring:
 jobs:
   albumJob:
     pageSize: 10
-    number: 1
+    number: 0
     cron: '0 30 10 * * ? *'
   artistJob:
     pageSize: 10
-    number: 1
+    number: 0
     cron: '0 30 10 * * ? *'
   trackJob:
-    start: 1
+    start: 345000
     end: 2_147_483_647
     number: 1
-    cron: '0 0 8 * * ? *'
+    cron: '0 40 8 * * ? *'
   overwriteExistingJobs: true
   autoStartup: true
 
