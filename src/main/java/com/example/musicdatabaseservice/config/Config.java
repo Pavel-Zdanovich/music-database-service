@@ -156,6 +156,7 @@ public class Config {
                 .newTrigger()
                 .forJob(jobDetail)
                 .withSchedule(CronScheduleBuilder.cronSchedule(cron))
+                .startNow()
                 .build();
     }
 

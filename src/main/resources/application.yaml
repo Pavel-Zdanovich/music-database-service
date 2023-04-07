@@ -24,16 +24,16 @@ jobs:
   albumJob:
     pageSize: 10
     number: 1
-    cron: '0 0 16 * * ? *'
+    cron: '0 30 10 * * ? *'
   artistJob:
     pageSize: 10
     number: 1
-    cron: '0 0 16 * * ? *'
+    cron: '0 30 10 * * ? *'
   trackJob:
     start: 1
     end: 2_147_483_647
     number: 1
-    cron: '0 30 15 * * ? *'
+    cron: '0 45 9 * * ? *'
   overwriteExistingJobs: true
   autoStartup: true
 
